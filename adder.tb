@@ -1,0 +1,23 @@
+module ripple_carry_adder_tb;
+    parameter N = 4;
+    logic [N-1:0] A, B;
+    logic Cin;
+    logic [N-1:0] Sum;
+    logic Cout;
+
+    // Instantiate RCA
+    ripple_carry_adder #(N) RCA (.A(A), .B(B), .Cin(Cin), .Sum(Sum), .Cout(Cout));
+
+    initial begin
+        $monitor("A=%b, B=%b, Cin=%b => Sum=%b, Cout=%b", A, B, Cin, Sum, Cout);
+
+        // Test Cases
+        A = 4'b0000; B = 4'b0000; Cin = 0; #10;
+        A = 4'b0001; B = 4'b0001; Cin = 0; #10;
+        A = 4'b0011; B = 4'b0101; Cin = 0; #10;
+        A = 4'b1111; B = 4'b1111; Cin = 0; #10;
+        A = 4'b1010; B = 4'b0110; Cin = 1; #10;
+        
+        $finish;
+    end
+endmodule
